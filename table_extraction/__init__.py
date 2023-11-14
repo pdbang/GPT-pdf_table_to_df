@@ -1,1 +1,1 @@
-from main import *
+from table_extraction.main import *
