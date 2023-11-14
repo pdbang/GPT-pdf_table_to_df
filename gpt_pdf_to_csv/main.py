@@ -1,4 +1,4 @@
-from table_extraction.scripts import tables_utils, gpt_utils
+from scripts import tables_utils, gpt_utils
 import os
 from io import StringIO
 from pandas import DataFrame
