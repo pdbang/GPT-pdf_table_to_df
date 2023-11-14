@@ -1,2 +1,0 @@
-import gpt_utils
-import tables_utils
