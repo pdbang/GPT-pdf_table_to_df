@@ -12,9 +12,10 @@ def displayPDF(file):
     base64_pdf = base64.b64encode(file.getvalue()).decode('utf-8')
 
     # Embedding PDF in HTML
-    pdf_display =  f"""<embed class="pdfobject" type="application/pdf" title="Embedded PDF"
-    src="data:application/pdf;base64,{base64_pdf}"
-    style="overflow: auto; width: 100%; height: 100%;">"""
+    # pdf_display =  f"""<embed class="pdfobject" type="application/pdf" title="Embedded PDF"
+    # src="data:application/pdf;base64,{base64_pdf}"
+    # style="overflow: auto; width: 100%; height: 100%;">"""
+    pdf_display = f"""<object data="data:application/pdf;base64,{base64_pdf}" type="application/pdf" width="100%" height="100%"></object>"""
 
     # Displaying File
     st.markdown(pdf_display, unsafe_allow_html=True)
@@ -52,4 +53,3 @@ if "df_data" in st.session_state:
                 st.session_state['final_df'] = gptable.gpt_csv_to_df(st.session_state["df_data"], eval(rows), eval(cols), system_prompt_values)
         if "final_df" in st.session_state:
             st.dataframe(st.session_state["final_df"])
-
