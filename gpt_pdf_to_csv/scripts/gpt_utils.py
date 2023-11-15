@@ -3,11 +3,8 @@ import json
 from io import StringIO
 from pandas import DataFrame
 
-def gpt_df_analysis(df_data: DataFrame, system_prompt: str, params_properties: dict, model: str = "gpt-3.5-turbo-1106"):
+def gpt_df_analysis(csv_data: StringIO, system_prompt: str, params_properties: dict, model: str = "gpt-3.5-turbo-1106"):
     client = OpenAI()
-
-    csv_data = StringIO()
-    df_data.to_csv(csv_data)
     
     messages = [{"role": "system", "content": system_prompt},
                 {"role": "user", "content": csv_data.getvalue()}]
@@ -55,7 +52,10 @@ def get_cols_and_rows(df_data: DataFrame, system_prompt: str, model: str = "gpt-
     result = gpt_df_analysis(csv_data, system_prompt, params_properties, model)
     return result["Rows"], result["Columns"]
 
-def get_csv_with_cols(csv_data: str, system_prompt: str, rows: list, cols: list, model: str = "gpt-3.5-turbo-1106"):
+def get_csv_with_cols(df_data: DataFrame, system_prompt: str, rows: list, cols: list, model: str = "gpt-3.5-turbo-1106"):
+    csv_data = StringIO()
+    df_data.to_csv(csv_data)
+
     params_properties = {
         "type": "object",
         "properties": {
