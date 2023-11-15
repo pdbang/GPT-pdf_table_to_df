@@ -3,7 +3,7 @@ import os
 from io import StringIO
 from pandas import DataFrame
 
-prompt_cols_base = "Ton objectif est de retrouver les noms de lignes et de colonnes adaptés dans ce csv qui est corrompu. Tu écriras les paramètres de la fonction sous forme de liste comme dans python : ['*nom*', '*nom*']."
+prompt_cols_base = 'Ton objectif est de retrouver les noms de lignes et de colonnes adaptés dans ce csv qui est corrompu. Tu écriras les paramètres de la fonction sous forme de liste comme dans python : ["*nom*", "*nom*"].'
 prompt_values_base = "Tu dois interpréter le csv qui te sera donné par l'utilisateur pour choisir les valeurs pertinentes pour les paramètres de la fonction to_csv."
 
 def set_openai_api_key(openai_api_key: str):
