@@ -3,3 +3,4 @@ git+https://github.com/pdbang/GPT-pdf_table_to_df.git
 streamlit
 openai
 tabula-py
+pdf2jpg

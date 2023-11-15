@@ -2,7 +2,6 @@ import streamlit as st
 import base64
 import gptable
 import display_pdf as pdf
-import streamlit.components.v1 as components
 
 if st.text_input("OpenAI API key", key="openai_api_key"):
     gptable.set_openai_api_key(st.session_state["openai_api_key"])
