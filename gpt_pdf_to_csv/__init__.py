@@ -1,1 +1,0 @@
-from gpt_pdf_to_csv.main import *

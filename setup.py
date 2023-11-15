@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='gpt_pdf_to_csv',
-    version='0.1',
+    name='gptable',
+    version='0.2',
     packages=find_packages(),
     install_requires=[
         "tabula-py",

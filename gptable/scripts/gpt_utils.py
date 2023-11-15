@@ -3,7 +3,7 @@ import json
 from io import StringIO
 from pandas import DataFrame
 
-def gpt_df_analysis(csv_data: StringIO, system_prompt: str, params_properties: dict, model: str = "gpt-3.5-turbo-1106"):
+def gpt_df_analysis(csv_data: StringIO, system_prompt: str, params_properties: dict, model: str = "gpt-3.5-turbo-1106") -> DataFrame:
     client = OpenAI()
     
     messages = [{"role": "system", "content": system_prompt},
@@ -14,11 +14,10 @@ def gpt_df_analysis(csv_data: StringIO, system_prompt: str, params_properties: d
         "function":{
         
             "name": "to_csv",
-            "description": "Create a csv file from the given parameters",
+            "description": "Create a csv file with the given parameters",
             "parameters": params_properties
-    }
-    }
-    ]
+        }
+    }]
 
     response = client.chat.completions.create(messages=messages,
                                    model=model,
@@ -31,7 +30,7 @@ def gpt_df_analysis(csv_data: StringIO, system_prompt: str, params_properties: d
     return json.loads(arguments)
 
 
-def get_cols_and_rows(df_data: DataFrame, system_prompt: str, model: str = "gpt-3.5-turbo-1106") -> (list, list):
+def gpt_cols_and_rows(df_data: DataFrame, system_prompt: str, model: str = "gpt-3.5-turbo-1106") -> (list, list):
     csv_data = StringIO()
     df_data.to_csv(csv_data)
     
@@ -52,7 +51,7 @@ def get_cols_and_rows(df_data: DataFrame, system_prompt: str, model: str = "gpt-
     result = gpt_df_analysis(csv_data, system_prompt, params_properties, model)
     return result["Rows"], result["Columns"]
 
-def get_csv_with_cols(df_data: DataFrame, system_prompt: str, rows: list, cols: list, model: str = "gpt-3.5-turbo-1106"):
+def gpt_df_from_cols(df_data: DataFrame, system_prompt: str, rows: list, cols: list, model: str = "gpt-3.5-turbo-1106") -> DataFrame:
     csv_data = StringIO()
     df_data.to_csv(csv_data)
 
