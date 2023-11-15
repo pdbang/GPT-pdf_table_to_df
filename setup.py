@@ -7,7 +7,6 @@ setup(
     install_requires=[
         "tabula-py",
         "pandas",
-        "io",
         "openai"
     ],
 )
