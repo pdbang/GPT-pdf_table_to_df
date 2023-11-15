@@ -40,30 +40,30 @@ def display_pdf(file):
             f.write(file.getvalue())
         # Save images in that sub-folder
         result = pdf2jpg.convert_pdf2jpg(file.name, tmp_sub_folder_path, pages="ALL")
-        if result:
-            images = []
-            for image_path in result[0]["output_jpgfiles"]:
-                images.append(np.array(Image.open(image_path)))
+        # if result:
+        images = []
+        for image_path in result[0]["output_jpgfiles"]:
+            images.append(np.array(Image.open(image_path)))
 
-            # Create merged image from all images + remove irrelevant whitespace
-            merged_arr = np.concatenate(images)
-            merged_arr = crop_white_space(merged_arr)
-            merged_path = os.path.join(tmp_sub_folder_path, "merged.jpeg")
-            Image.fromarray(merged_arr).save(merged_path)
+        # Create merged image from all images + remove irrelevant whitespace
+        merged_arr = np.concatenate(images)
+        merged_arr = crop_white_space(merged_arr)
+        merged_path = os.path.join(tmp_sub_folder_path, "merged.jpeg")
+        Image.fromarray(merged_arr).save(merged_path)
 
-            css='''
-            <style>
-                [data-testid="stImage"]{
-                    overflow: scroll;
-                    height: 200px;
-                }
-            </style>
-            '''
+        css='''
+        <style>
+            [data-testid="stImage"]{
+                overflow: scroll;
+                height: 200px;
+            }
+        </style>
+        '''
 
-            st.markdown(css, unsafe_allow_html=True)
+        st.markdown(css, unsafe_allow_html=True)
 
 
-            # Display the image
-            st.image(merged_path)
+        # Display the image
+        st.image(merged_path)
                 
         try_remove(tmp_sub_folder_path)
