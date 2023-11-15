@@ -15,8 +15,8 @@ def displayPDF(file):
     # pdf_display =  f"""<embed class="pdfobject" type="application/pdf" title="Embedded PDF"
     # src="data:application/pdf;base64,{base64_pdf}"
     # style="overflow: auto; width: 100%; height: 100%;">"""
-    pdf_display = f"""<object data="data:application/pdf;base64,{base64_pdf}" type="application/pdf" width="100%" height="100%"></object>"""
-
+    # pdf_display = f"""<object data="data:application/pdf;base64,{base64_pdf}" type="application/pdf" width="100%" height="100%"></object>"""
+    pdf_display = f"""<iframe src="data:application/pdf;base64,{base64_pdf}" width="100%" height="100%"></iframe>"""
     # Displaying File
     st.markdown(pdf_display, unsafe_allow_html=True)
 
