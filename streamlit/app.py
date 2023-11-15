@@ -1,6 +1,5 @@
 import streamlit as st
 import base64
-import pandas as pd
 import gptable
 
 if st.text_input("OpenAI API key", key="openai_api_key"):
@@ -24,7 +23,7 @@ if pdf_file:
     displayPDF(pdf_file)
     if st.button("Récupérer le csv simple"):
         with st.spinner("Calcul du csv par tabula..."):
-            df_data = gptable.basic_pdf_to_csv(pdf_file)
+            df_data = gptable.basic_pdf_to_df(pdf_file)
         st.session_state["df_data"] = df_data
 if "df_data" in st.session_state:
     with st.expander("csv initial"):
@@ -50,6 +49,6 @@ if "df_data" in st.session_state:
 
         if st.button("Récupérer les données"):
             with st.spinner("Appel à gpt-3.5 en cours..."):
-                st.session_state['final_df'] = gptable.gpt_csv_to_df(st.session_state["df_data"], eval(rows), eval(cols), system_prompt_values)
+                st.session_state['final_df'] = gptable.gpt_clean_df(st.session_state["df_data"], eval(rows), eval(cols), system_prompt_values)
         if "final_df" in st.session_state:
             st.dataframe(st.session_state["final_df"])
