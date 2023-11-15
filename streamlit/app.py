@@ -1,6 +1,8 @@
 import streamlit as st
 import base64
 import gptable
+import display_pdf as pdf
+import streamlit.components.v1 as components
 
 if st.text_input("OpenAI API key", key="openai_api_key"):
     gptable.set_openai_api_key(st.session_state["openai_api_key"])
@@ -23,8 +25,10 @@ def displayPDF(file):
     pdf_display = F'<iframe src="data:application/pdf;base64,{base64_pdf}" width="100%" height="100%" type="application/pdf"></iframe>'
     st.markdown(pdf_display, unsafe_allow_html=True)
 
+st.button("As")
 if pdf_file:
-    displayPDF(pdf_file)
+    # displayPDF(pdf_file)
+    pdf.display_pdf(pdf_file)
     if st.button("Récupérer le csv simple"):
         with st.spinner("Calcul du csv par tabula..."):
             df_data = gptable.basic_pdf_to_df(pdf_file)
