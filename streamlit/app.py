@@ -8,10 +8,6 @@ from io import StringIO
 st.title("PDF to table with LLM")
 st.subheader("Utilisation example of gptable")
 
-
-if st.text_input("OpenAI API key", key="openai_api_key"):
-    gptable.set_openai_api_key(st.session_state["openai_api_key"])
-
 pdf_file = st.file_uploader("Upload your pdf here", type=["pdf"])
 
 # def displayPDF(file):
@@ -41,6 +37,8 @@ if "df_data" in st.session_state:
     with st.expander("csv initial"):
         st.dataframe(st.session_state["df_data"])
     
+    if st.text_input("OpenAI API key", key="openai_api_key"):
+        gptable.set_openai_api_key(st.session_state["openai_api_key"])
 
     system_prompt_cols = st.text_area("Prompt pour la récupération des lignes et des colonnes")
 
