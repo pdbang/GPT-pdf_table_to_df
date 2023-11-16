@@ -28,11 +28,11 @@ def displayPDF(file):
 
 st.button("As")
 if pdf_file:
-    # displayPDF(pdf_file)
-    if "img_path" not in st.session_state or "pdf_name" not in st.session_state or pdf_file.name != st.session_state["pdf_name"]:
-        st.session_state["img_path"] = pdf.pdf_to_img(pdf_file)
-        st.session_state["pdf_name"] =pdf_file.name
-    pdf.display_img(st.session_state["img_path"])
+    displayPDF(pdf_file)
+    # if "img_path" not in st.session_state or "pdf_name" not in st.session_state or pdf_file.name != st.session_state["pdf_name"]:
+    #     st.session_state["img_path"] = pdf.pdf_to_img(pdf_file)
+    #     st.session_state["pdf_name"] = pdf_file.name
+    # pdf.display_img(st.session_state["img_path"])
     if st.button("Récupérer le csv simple"):
         with st.spinner("Calcul du csv par tabula..."):
             df_data = gptable.basic_pdf_to_df(pdf_file)
