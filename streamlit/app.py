@@ -21,8 +21,6 @@ pdf_file = st.file_uploader("Upload your pdf here", type=["pdf"])
 #     width: 100%; 
 #     height: 100%;">"""
 #     st.markdown(pdf_display, unsafe_allow_html=True)
-
-st.button("As")
 if pdf_file:
     # displayPDF(pdf_file)
     if "img_path" not in st.session_state or "pdf_name" not in st.session_state or pdf_file.name != st.session_state["pdf_name"]:
@@ -36,6 +34,8 @@ if pdf_file:
 if "df_data" in st.session_state:
     with st.expander("csv initial"):
         st.dataframe(st.session_state["df_data"])
+
+    st.write("---")
     
     if st.text_input("OpenAI API key", key="openai_api_key"):
         gptable.set_openai_api_key(st.session_state["openai_api_key"])
@@ -55,6 +55,8 @@ if "df_data" in st.session_state:
         rows = col1.data_editor(st.session_state["rows"], num_rows="dynamic", height=200)
         cols = col2.data_editor(st.session_state["cols"], num_rows="dynamic", height=200)
 
+        st.write("---")
+        
         system_prompt_values = st.text_area("Prompt pour la récupération des valeurs de lignes et de colonnes")
 
         if st.button("Récupérer les données"):
