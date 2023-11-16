@@ -16,9 +16,9 @@ def gpt_rows_and_cols(df_data, system_prompt: str) -> (list, list):
     system_prompt = prompt_cols_base + "\n" + system_prompt
     return gpt_utils.gpt_cols_and_rows(df_data, system_prompt)
 
-def gpt_clean_df(df_data, rows: list, cols: list, system_prompt: str) -> DataFrame:
+def gpt_clean_df(df_data, rows: list, cols: list, system_prompt: str, rows_desc: list=None, cols_desc: list=None) -> DataFrame:
     system_prompt = prompt_values_base + "\n" + system_prompt
-    dico = gpt_utils.gpt_df_from_cols(df_data, system_prompt, rows, cols)
+    dico = gpt_utils.gpt_df_from_cols(df_data, system_prompt, rows, cols, rows_desc, cols_desc)
     return tables_utils.to_csv(**dico)
 
 def gpt_basic_pdf_to_df(filename: str, rows: list, cols: list, system_prompt: str) -> DataFrame:

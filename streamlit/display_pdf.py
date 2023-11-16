@@ -33,7 +33,7 @@ def crop_white_space(arr: np.array) -> np.array:
     merged_arr = arr[:last_non_white_row_idx + FOOTER_ROWS]
     return merged_arr
 
-def display_pdf(file):
+def pdf_to_img(file):
         # Create temporary folder for generated image
         tmp_sub_folder_path = create_tmp_sub_folder()
         with open(file.name, "wb") as f:
@@ -51,7 +51,13 @@ def display_pdf(file):
         merged_path = os.path.join(tmp_sub_folder_path, "merged.jpeg")
         Image.fromarray(merged_arr).save(merged_path)
 
-        css='''
+        # Display the image
+        return merged_path
+                
+        # try_remove(tmp_sub_folder_path)
+    
+def display_img(img_path):
+    css='''
         <style>
             [data-testid="stImage"]{
                 overflow: scroll;
@@ -60,10 +66,6 @@ def display_pdf(file):
         </style>
         '''
 
-        st.markdown(css, unsafe_allow_html=True)
+    st.markdown(css, unsafe_allow_html=True)
 
-
-        # Display the image
-        st.image(merged_path)
-                
-        try_remove(tmp_sub_folder_path)
+    st.image(img_path)

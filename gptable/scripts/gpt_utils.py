@@ -24,7 +24,7 @@ def gpt_df_analysis(csv_data: StringIO, system_prompt: str, params_properties: d
                                    tool_choice={"type": "function", "function": {"name": "to_csv"}},
                                    tools=tools,
                                    temperature=0)
-    
+    print(response)
     arguments = response.choices[0].message.tool_calls[0].function.arguments
     print(arguments)
     return json.loads(arguments)
@@ -51,7 +51,7 @@ def gpt_cols_and_rows(df_data: DataFrame, system_prompt: str, model: str = "gpt-
     result = gpt_df_analysis(csv_data, system_prompt, params_properties, model)
     return result["Rows"], result["Columns"]
 
-def gpt_df_from_cols(df_data: DataFrame, system_prompt: str, rows: list, cols: list, model: str = "gpt-3.5-turbo-1106") -> DataFrame:
+def gpt_df_from_cols(df_data: DataFrame, system_prompt: str, rows: list, cols: list, rows_desc: list=None, cols_desc: list=None, model: str = "gpt-3.5-turbo-1106") -> DataFrame:
     csv_data = StringIO()
     df_data.to_csv(csv_data)
 
@@ -59,8 +59,9 @@ def gpt_df_from_cols(df_data: DataFrame, system_prompt: str, rows: list, cols: l
         "type": "object",
         "properties": {
             f"{row} ## {col}": {
-                "type": "string"
-            } for row in rows for col in cols
+                "type": "string",
+                "description": f"{rows_desc[i] or ''} ## {cols_desc[j] or ''}"
+            } for (i, row) in enumerate(rows) for (j, col) in enumerate(cols)
         },
         "required": []
     }
