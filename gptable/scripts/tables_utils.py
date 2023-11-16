@@ -2,11 +2,13 @@ from tabula import read_pdf
 import pandas as pd
 from collections import defaultdict
 
-def pdf_to_df(pdf_path : str, n_row_min : int = 10) -> pd.DataFrame:
+def pdf_to_df(pdf_path : str, n_row_min : int) -> pd.DataFrame:
     dfs = read_pdf(pdf_path, pages="all")
     dfs = [df for df in dfs if df.shape[0] > n_row_min]
     if len(dfs) == 1:
         return dfs[0]
+    elif len(dfs) == 0:
+        print("No table detected")
     else:
         print("WARNING : More than one table have been detected, they have been concatened.")
         return pd.concat(dfs)

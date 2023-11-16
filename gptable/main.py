@@ -8,8 +8,8 @@ prompt_values_base = "Tu dois interpréter le csv qui te sera donné par l'utili
 def set_openai_api_key(openai_api_key: str):
     os.environ["OPENAI_API_KEY"] = openai_api_key
 
-def basic_pdf_to_df(filename: str) -> DataFrame:
-    df_data = tables_utils.pdf_to_df(filename)
+def basic_pdf_to_df(filename: str, n_row_min: int=5) -> DataFrame:
+    df_data = tables_utils.pdf_to_df(filename, n_row_min)
     return df_data
 
 def gpt_rows_and_cols(df_data, system_prompt: str) -> (list, list):
