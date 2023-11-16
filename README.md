@@ -23,3 +23,4 @@ Use the following command to install the required packages:
 ```python
 %pip install --upgrade git+https://github.com/pdbang/GPT-pdf_to_csv.git
 ```
+Additionally, to use tabula, make sure to have Java installed. You can download it from [Java's official website](https://www.java.com/en/download/).
