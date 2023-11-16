@@ -14,21 +14,21 @@ if st.text_input("OpenAI API key", key="openai_api_key"):
 
 pdf_file = st.file_uploader("Upload your pdf here", type=["pdf"])
 
-def displayPDF(file):
-    base64_pdf = base64.b64encode(file.getvalue()).decode('utf-8')
-    # Embedding PDF in HTML
-    pdf_display =  f"""<embed class="pdfobject" 
-    type="application/pdf" 
-    title="Embedded PDF"
-    src="data:application/pdf;base64,{base64_pdf}"
-    style="overflow: auto; 
-    width: 100%; 
-    height: 100%;">"""
-    st.markdown(pdf_display, unsafe_allow_html=True)
+# def displayPDF(file):
+#     base64_pdf = base64.b64encode(file.getvalue()).decode('utf-8')
+#     # Embedding PDF in HTML
+#     pdf_display =  f"""<embed class="pdfobject" 
+#     type="application/pdf" 
+#     title="Embedded PDF"
+#     src="data:application/pdf;base64,{base64_pdf}"
+#     style="overflow: auto; 
+#     width: 100%; 
+#     height: 100%;">"""
+#     st.markdown(pdf_display, unsafe_allow_html=True)
 
 st.button("As")
 if pdf_file:
-    displayPDF(pdf_file)
+    # displayPDF(pdf_file)
     if "img_path" not in st.session_state or "pdf_name" not in st.session_state or pdf_file.name != st.session_state["pdf_name"]:
         st.session_state["img_path"] = pdf.pdf_to_img(pdf_file)
         st.session_state["pdf_name"] = pdf_file.name
