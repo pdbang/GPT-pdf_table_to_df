@@ -1,5 +1,5 @@
 ﻿[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://gptable.streamlit.app/)
-# GPT-pdf_to_csv
+# GPT-pdf_table_to_df
 
 This repository aims to enhance the usage of Tabula for extracting tables from PDFs by incorporating GPT-3.5.
 
